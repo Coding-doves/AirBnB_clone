@@ -9,7 +9,7 @@ It works in both non-interactive mode
 $ echo "help" | ./console.py
 (hbnb)
 
-Documented commands (type help <topic>):
+### Documented commands (type help <topic>):
 ========================================
 EOF  help  quit
 (hbnb) 
@@ -20,7 +20,7 @@ $
 $ cat test_help | ./console.py
 (hbnb)
 
-Documented commands (type help <topic>):
+### Documented commands (type help <topic>):
 ========================================
 EOF  help  quit
 (hbnb) 
