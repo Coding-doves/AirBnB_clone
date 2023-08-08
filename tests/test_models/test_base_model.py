@@ -40,8 +40,8 @@ class TestBaseModal(unittest.TestCase):
 
     def test_base_model_with_kwargs(self):
         date = datetime.datetime.today()
-        date_format = date.isoformat()
-        basemodel = BaseModel(id="345", created_at=date_format, updated_at=date_format)
+        dt_frmt = date.isoformat()
+        basemodel = BaseModel(id="345", created_at=dt_frmt, updated_at=dt_frmt)
         self.assertEqual(basemodel.id, "345")
         self.assertEqual(basemodel.created_at, date)
         self.assertEqual(basemodel.updated_at, date)
