@@ -38,5 +38,17 @@ class TestBaseModal(unittest.TestCase):
         self.assertIsInstance(json_model['created_at'], str)
         self.assertIsInstance(json_model['updated_at'], str)
 
+    def test_base_model_with_kwargs(self):
+        date = datetime.datetime.today()
+        date_format = date.isoformat()
+        basemodel = BaseModel(id="345", created_at=date_format, updated_at=date_format)
+        self.assertEqual(basemodel.id, "345")
+        self.assertEqual(basemodel.created_at, date)
+        self.assertEqual(basemodel.updated_at, date)
+
+    def test_base_model_with_None_kwargs(self):
+        with self.assertRaises(TypeError):
+            BaseModel(id=None, created_at=None, updated_at=None)
+
         if __name__ == '__main__':
             unittest.main()

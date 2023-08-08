@@ -4,18 +4,28 @@ creating a Base model
 
 '''
 import uuid
-import datetime
+from datetime import datetime
 
 
 class BaseModel:
     '''initializing base'''
     unique_id = uuid.uuid4()
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         '''public instance'''
-        self.id = str(BaseModel.unique_id)
-        self.created_at = datetime.datetime.now()
-        self.updated_at = self.created_at
+        dt_obj = "%Y-%m-%dT%H:%M:%S.%f"
+        if kwargs is not None and kwargs != {}:
+            for key, value in kwargs.items():
+                if key == "created_at":
+                    self.__dict__[key] = datetime.strptime(value, dt_obj)
+                elif key == "updated_at":
+                    self.__dict__[key] = datetime.strptime(value, dt_obj)
+                else:
+                    self.__dict__[key] = value
+        else:
+            self.id = str(BaseModel.unique_id)
+            self.created_at = datetime.now()
+            self.updated_at = self.created_at
 
     def __str__(self):
         '''magic method'''
@@ -23,7 +33,7 @@ class BaseModel:
 
     def save(self):
         '''update datetime with current datetime'''
-        self.updated_at = datetime.datetime.now()
+        self.updated_at = datetime.now()
 
     def to_dict(self):
         '''return dictionary - key/value'''
