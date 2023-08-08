@@ -34,17 +34,3 @@ class BaseModel:
         dic['updated_at'] = self.updated_at.isoformat()
 
         return dic
-
-    def dict_rep(self):
-        '''
-        dictionary representation with simple object type
-
-        '''
-        dic = {
-                '__class__': self.__class__.__name__,
-                'id': self.id,
-                'created_at': self.created_at.isoformat(),
-                'updated_at': self.updated_at.isoformat()
-                }
-
-        return dic
