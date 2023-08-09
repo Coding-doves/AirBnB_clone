@@ -13,6 +13,8 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         '''public instance'''
+        from models import storage
+
         dt_obj = "%Y-%m-%dT%H:%M:%S.%f"
         if kwargs is not None and kwargs != {}:
             for key, value in kwargs.items():
@@ -26,6 +28,7 @@ class BaseModel:
             self.id = str(BaseModel.unique_id)
             self.created_at = datetime.now()
             self.updated_at = self.created_at
+            storage.new(self)
 
     def __str__(self):
         '''magic method'''
@@ -33,7 +36,10 @@ class BaseModel:
 
     def save(self):
         '''update datetime with current datetime'''
+        from models import storage
+
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         '''return dictionary - key/value'''
