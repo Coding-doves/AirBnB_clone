@@ -32,7 +32,7 @@ class FileStorage:
         for key, val in FileStorage.__objects.items():
             obj[key] = val.to_dict()
 
-        with open(self.__file_path, 'w', encoding='utf8') as file:
+        with open(FileStorage.__file_path, 'w', encoding='utf8') as file:
             string = json.dumps(obj)
             file.write(string)
 
@@ -42,7 +42,7 @@ class FileStorage:
 
         '''
         try:
-            with open(self.__file_path, 'r', encoding='utf8') as file:
+            with open(FileStorage.__file_path, 'r', encoding='utf8') as file:
                 objt_file = file.read()
 
                 from models.base_model import BaseModel
@@ -53,6 +53,6 @@ class FileStorage:
                         cls_nam, obj_id = key.split('.')
 
                         instance = BaseModel(**val)
-                        self.__objects[key] = instance
+                        FileStorage.__objects[key] = instance
         except FileNotFoundError:
             pass
