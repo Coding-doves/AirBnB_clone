@@ -46,13 +46,19 @@ class FileStorage:
                 objt_file = file.read()
 
                 from models.base_model import BaseModel
+                from models.user import User
 
                 if objt_file:
                     objt = json.loads(objt_file)
                     for key, val in objt.items():
+
                         cls_nam, obj_id = key.split('.')
 
-                        instance = BaseModel(**val)
-                        FileStorage.__objects[key] = instance
+                        if cls_nam == 'BaseModal':
+                            inst = BaseModal(**val)
+                        if cls_nam == 'User':
+                            inst = User(**val)
+
+                            FileStorage.__objects[key] = inst
         except FileNotFoundError:
             pass
