@@ -14,7 +14,7 @@ class TestBaseModal(unittest.TestCase):
     def test_base_model(self):
         '''testing base'''
         self.base = BaseModel()
-        '''self.assertIsInstance(self.base.id, uuid.uuid4)'''
+        self.assertIsInstance(self.base.id, str)
         self.assertIsInstance(self.base.created_at, datetime.datetime)
         self.assertIsInstance(self.base.updated_at, datetime.datetime)
 

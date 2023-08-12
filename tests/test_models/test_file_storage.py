@@ -1,57 +1,89 @@
 #!/usr/bin/python3
-'''testcase for base class'''
+'''testcase for filestorage class'''
 
 import unittest
+import os
+import json
 import datetime
 import uuid
 from models import storage
+from models.engine.file_storage import FileStorage
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 from models.base_model import BaseModel
+from models.user import User
 
 
 class TestFileStorage(unittest.TestCase):
     '''
-    Test cases for the Base class.
+    Test cases for the filestorage class.
 
     '''
-    def test_file_storage(self):
+    def setUp(self):
         '''testing file_storage'''
-        self.base = BaseModel()
-        self.base.name = "Model Airbnb"
-        self.base.my_number = 20
-        '''save BaseModel to storage'''
-        self.base.save()
+        self.storage = FileStorage()
 
-        self.assertIsInstance(self.base.created_at, datetime.datetime)
-        self.assertIsInstance(self.base.updated_at, datetime.datetime)
-        self.assertEqual(self.base.name, 'Model Airbnb')
-        self.assertEqual(self.base.my_number, 20)
+    def test_reload(self):
+        # Create test instances for each class
+        base_model = BaseModel()
+        user = User()
+        place = Place()
+        state = State()
+        city = City()
+        amenity = Amenity()
+        review = Review()
 
-        '''testing save method''
-        key = f"{self.base.__class__.__name__}.{self.base.id}"
-        storage.save()
-        with open(storage.__file_path, 'r', encoding='utf8') as file:
-            json_data = file.read()
-            self.assertIn(key, json_data)
+        # Adding instances using the new() => classes to __objects
+        self.storage.new(base_model)
+        self.storage.new(user)
+        self.storage.new(place)
+        self.storage.new(state)
+        self.storage.new(city)
+        self.storage.new(amenity)
+        self.storage.new(review)
 
-        ''clears objects in storage making it empty''
-        storage.__objects = {}
+        # all() returns dictionary
+        all_objs = self.storage.all()
+        self.assertIsInstance(all_objs, dict)
 
-        ''create new instance''
-        new_base = BaseModel()
-        new_base.save()
-        key = f"{new_base.__class__.__name__}.{new_base.id}"
-        self.assertIn(key, storage.__objects)
-        self.assertEqual(storage.__objects[key], new_base)''
+        # Save to file and reload it
+        self.storage.save()
+        self.storage.reload()
 
+        # Confirm if instances were reloaded correctly
+        self.assertIn(
+            f"{base_model.__class__.__name__}.{base_model.id}",
+            self.storage.all()
+        )
 
-        ''clears objects in storage making it empty''
-        storage.__objects = {}
+        self.assertIsNotNone(
+            self.storage.all().get(f"{user.__class__.__name__}.{user.id}")
+        )
 
-        ''clears objects in storage and reload''
-        storage.reload()
+        self.assertIsNotNone(
+            self.storage.all().get(f"{place.__class__.__name__}.{place.id}")
+        )
 
-        self.assertIn(key, storage.__objects)
-        self.assertEqual(storage.__objects[key].id, self.base.id)
-    '''
+        self.assertIsNotNone(
+            self.storage.all().get(f"{state.__class__.__name__}.{state.id}")
+        )
+
+        self.assertIsNotNone(
+            self.storage.all().get(f"{city.__class__.__name__}.{city.id}")
+        )
+
+        self.assertIsNotNone(
+            self.storage.all().get(
+                f"{amenity.__class__.__name__}.{amenity.id}"
+            )
+        )
+
+        self.assertIsNotNone(
+            self.storage.all().get(f"{review.__class__.__name__}.{review.id}")
+        )
+
     if __name__ == '__main__':
         unittest.main()

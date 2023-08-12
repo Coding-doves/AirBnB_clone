@@ -43,32 +43,31 @@ class FileStorage:
         '''
         try:
             with open(FileStorage.__file_path, 'r', encoding='utf8') as file:
-                objt_file = file.read()
+                objt = json.load(file)
 
                 from models.base_model import BaseModel
                 from models.user import User
+                from models.state import State
+                from models.city import City
+                from models.amenity import Amenity
+                from models.place import Place
+                from models.review import Review
 
-                if objt_file:
-                    objt = json.loads(objt_file)
-                    for key, val in objt.items():
+                cls_maping = {
+                    'BaseModel': BaseModel,
+                    'User': User,
+                    'Place': Place,
+                    'State': State,
+                    'City': City,
+                    'Amenity': Amenity,
+                    'Review': Review
+                }
+            for key, val in objt.items():
+                cls_name = val['__class__']
+                cls = cls_maping.get(cls_name)
 
-                        cls_nam, obj_id = key.split('.')
-
-                        if cls_nam == 'BaseModal':
-                            inst = BaseModal(**val)
-                        if cls_nam == 'User':
-                            inst = User(**val)
-                        if cls_nam == 'Place':
-                            inst = Place(**val)
-                        if cls_nam == 'State':
-                            inst = State(**val)
-                        if cls_nam == 'City':
-                            inst = City(**val)
-                        if cls_nam == 'Amenity':
-                            inst = Amenity(**val)
-                        if cls_nam == 'Review':
-                            inst = Review(**val)
-
-                            FileStorage.__objects[key] = inst
+            if cls:
+                inst = cls(**val)
+                FileStorage.__objects[key] = inst
         except FileNotFoundError:
             pass
