@@ -84,5 +84,6 @@ class TestFileStorage(unittest.TestCase):
             self.storage.all().get(f"{review.__class__.__name__}.{review.id}")
         )
 
+
     if __name__ == '__main__':
         unittest.main()

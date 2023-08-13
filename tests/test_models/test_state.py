@@ -52,5 +52,6 @@ class TestState(unittest.TestCase):
         with self.assertRaises(TypeError):
             State(id=None, name='', created_at=None, updated_at=None)
 
+
         if __name__ == '__main__':
             unittest.main()

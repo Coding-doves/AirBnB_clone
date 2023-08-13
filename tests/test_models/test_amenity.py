@@ -52,5 +52,6 @@ class TestAmenity(unittest.TestCase):
         with self.assertRaises(TypeError):
             Amenity(id=None, name='', created_at=None, updated_at=None)
 
+
         if __name__ == '__main__':
             unittest.main()
