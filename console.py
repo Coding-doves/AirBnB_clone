@@ -34,10 +34,10 @@ class HBNBCommand(cmd.Cmd):
 
         '''
         if not arg:
-            print ("** class name missing **")
+            print("** class name missing **")
             return
         elif arg not in HBNBCommand.__mod_list:
-            print ("** class doesn't exist **")
+            print("** class doesn't exist **")
             return
         else:
             if arg in HBNBCommand.__mod_list:
@@ -111,6 +111,7 @@ class HBNBCommand(cmd.Cmd):
                     if string[0] == obj.__class__.__name__:
                         instances.append(obj.__str__())
                 print(instances)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
