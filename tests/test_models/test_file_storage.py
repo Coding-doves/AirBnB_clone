@@ -25,8 +25,7 @@ class TestFileStorage(unittest.TestCase):
         self.storage = FileStorage()
 
     def test_reload(self):
-        '''testing'''
-        # Create test instances for each class
+        ''' Create test instances for each class'''
         base_model = BaseModel()
         user = User()
         place = Place()
@@ -35,7 +34,7 @@ class TestFileStorage(unittest.TestCase):
         amenity = Amenity()
         review = Review()
 
-        # Adding instances using the new() => classes to __objects
+        ''' Adding instances using the new() => classes to __objects'''
         self.storage.new(base_model)
         self.storage.new(user)
         self.storage.new(place)
@@ -44,15 +43,14 @@ class TestFileStorage(unittest.TestCase):
         self.storage.new(amenity)
         self.storage.new(review)
 
-        # all() returns dictionary
+        ''' all() returns dictionary'''
         all_objs = self.storage.all()
         self.assertIsInstance(all_objs, dict)
 
-        # Save to file and reload it
         self.storage.save()
         self.storage.reload()
 
-        # Confirm if instances were reloaded correctly
+        ''' Confirm if instances were reloaded correctly'''
         self.assertIn(
             f"{base_model.__class__.__name__}.{base_model.id}",
             self.storage.all()
@@ -83,6 +81,19 @@ class TestFileStorage(unittest.TestCase):
         self.assertIsNotNone(
             self.storage.all().get(f"{review.__class__.__name__}.{review.id}")
         )
+
+        def test_serialization_deserialization(self):
+            '''testing'''
+            new_storage = FileStorage()
+            new_storage.reload()
+
+            all_objt = new_storage.all()
+
+            self.assertEqual(len(all_objects), 1)
+            loaded_obj = list(all_objects.values())[0]
+
+            self.assertIsInstance(loaded_obj, BaseModel)
+            self.assertEqual(loaded_obj.id, self.base_mode.id)
 
 
     if __name__ == '__main__':
