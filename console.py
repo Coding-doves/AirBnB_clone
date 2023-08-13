@@ -2,6 +2,7 @@
 """For Hbnb console Definition."""
 import cmd
 import sys
+import shlex
 from models import storage
 from models.base_model import BaseModel
 
@@ -54,37 +55,39 @@ class HBNBCommand(cmd.Cmd):
 
         '''
 
-        if len(sys.argv) < 2:
+        string = shlex.split(argv)
+        obj_dict = storage.all()
+        if len(string) == 0:
             print("** class name missing **")
-            return
+        elif string[0] not in HBNBCommand.__mod_list:
+            print("** class doesn't exist **")
+        elif len(string) == 1:
+            print("** instance id missing **")
+        elif "{}.{}".format(string[0], string[1]) not in obj_dict.keys():
+            print("** no instance found **")
         else:
-            model = sys.argv[1]
+            obj = obj_dict["{}.{}".format(string[0], string[1])]
+            print(obj)
 
-            if model not in HBNBCommand.__mod_list:
-                print("** class doesn't exist **")
-                return
-            elif len(sys.argv) > 3:
-                print("** instance id missing **")
-                return
-            else:
-                model_id = sys.argv[2]
-
-                key = f"{model_id}.{model}"
-
-                if key in storage.all():
-                    str_rep = storage.all()[key]
-                    print(str_rep)
-                    return
-                else:
-                    print("** no instance found **")
-                    return
-
-    def do_destroy(self):
+    def do_destroy(self, arg):
         '''
         Deletes an instance based on the class name and id
         (save the change into the JSON file). 
 
         '''
+        string = shlex.split(arg)
+        obj_dict = storage.all()
+        if len(string) == 0:
+            print("** class name missing **")
+        elif string[0] not in HBNBCommand.__mod_list:
+            print("** class doesn't exist **")
+        elif len(string) == 1:
+            print("** instance id missing **")
+        elif "{}.{}".format(string[0], string[1]) not in obj_dict.keys():
+            print("** no instance found **")
+        else:
+            del obj_dict["{}.{}".format(string[0], string[1])]
+            storage.save()
 
     def do_update(self):
         '''
@@ -93,12 +96,24 @@ class HBNBCommand(cmd.Cmd):
 
         '''
 
-    def do_all(self):
+    def do_all(self, arg):
         '''
         Prints all string representation of all instances based
         or not on the class name.
 
         '''
+        string = shlex.split(arg)
+        if len(string) > 0:
+            if string[0] not in HBNBCommand.__mod_list:
+                print("** class doesn't exist **")
+            else:
+                instances = []
+                for obj in storage.all().values():
+                    if string[0] == obj.__class__.__name__:
+                        instances.append(obj.__str__())
+                print(instances)
+                    
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
