@@ -18,9 +18,7 @@ class BaseModel:
         dt_obj = "%Y-%m-%dT%H:%M:%S.%f"
         if kwargs is not None and kwargs != {}:
             for key, value in kwargs.items():
-                if key == "created_at":
-                    self.__dict__[key] = datetime.strptime(value, dt_obj)
-                elif key == "updated_at":
+                if key == "created_at" or key == "updated_at":
                     self.__dict__[key] = datetime.strptime(value, dt_obj)
                 else:
                     self.__dict__[key] = value

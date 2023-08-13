@@ -2,7 +2,6 @@
 '''testcase for amenity class'''
 import unittest
 import datetime
-import uuid
 from models.amenity import Amenity
 
 
@@ -34,6 +33,7 @@ class TestAmenity(unittest.TestCase):
         self.assertIsInstance(json_model['updated_at'], str)
 
     def test_amenity_with_kwargs(self):
+        '''testing kwargs'''
         date = datetime.datetime.today()
         dt_frmt = date.isoformat()
         amenity = Amenity(
@@ -48,8 +48,10 @@ class TestAmenity(unittest.TestCase):
         self.assertEqual(amenity.updated_at, date)
 
     def test_amenity_with_none_kwargs(self):
+        '''testing'''
         with self.assertRaises(TypeError):
             Amenity(id=None, name='', created_at=None, updated_at=None)
+
 
         if __name__ == '__main__':
             unittest.main()

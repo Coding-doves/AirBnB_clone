@@ -1,10 +1,16 @@
 #!/usr/bin/python3
 """For Hbnb console Definition."""
 import cmd
-import sys
 import shlex
 from models import storage
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -35,10 +41,10 @@ class HBNBCommand(cmd.Cmd):
 
         '''
         if not arg:
-            print ("** class name missing **")
+            print("** class name missing **")
             return
         elif arg not in HBNBCommand.__mod_list:
-            print ("** class doesn't exist **")
+            print("** class doesn't exist **")
             return
         else:
             if arg in HBNBCommand.__mod_list:
@@ -72,7 +78,7 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, arg):
         '''
         Deletes an instance based on the class name and id
-        (save the change into the JSON file). 
+        (save the change into the JSON file).
 
         '''
         string = shlex.split(arg)
@@ -138,7 +144,6 @@ class HBNBCommand(cmd.Cmd):
                     if string[0] == obj.__class__.__name__:
                         instances.append(obj.__str__())
                 print(instances)
-                    
 
 
 if __name__ == '__main__':

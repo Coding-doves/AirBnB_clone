@@ -3,7 +3,6 @@
 
 import unittest
 import datetime
-import uuid
 from models.base_model import BaseModel
 
 
@@ -39,6 +38,7 @@ class TestBaseModal(unittest.TestCase):
         self.assertIsInstance(json_model['updated_at'], str)
 
     def test_base_model_with_kwargs(self):
+        '''testing'''
         date = datetime.datetime.today()
         dt_frmt = date.isoformat()
         basemodel = BaseModel(id="345", created_at=dt_frmt, updated_at=dt_frmt)
@@ -46,9 +46,11 @@ class TestBaseModal(unittest.TestCase):
         self.assertEqual(basemodel.created_at, date)
         self.assertEqual(basemodel.updated_at, date)
 
-    def test_base_model_with_None_kwargs(self):
+    def test_base_model_with_none_kwargs(self):
+        '''testing'''
         with self.assertRaises(TypeError):
             BaseModel(id=None, created_at=None, updated_at=None)
+
 
         if __name__ == '__main__':
             unittest.main()
