@@ -119,14 +119,12 @@ class HBNBCommand(cmd.Cmd):
         else:
             key = obj_dict["{}.{}".format(string[0], string[1])]
             if string[2] in key.__class__.__dict__.keys():
-                #if string[2] is in the class as a key
+                # if string[2] is in the class as a key
                 type_cast_as = type(key.__class__.__dict__[string[2]])
                 key.__dict__[string[2]] = type_cast_as(string[3])
             else:
                 key.__dict__[string[2]] = string[3]
             storage.save()
-            
-
 
     def do_all(self, arg):
         '''

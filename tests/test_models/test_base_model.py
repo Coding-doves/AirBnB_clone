@@ -52,5 +52,5 @@ class TestBaseModal(unittest.TestCase):
             BaseModel(id=None, created_at=None, updated_at=None)
 
 
-        if __name__ == '__main__':
-            unittest.main()
+if __name__ == '__main__':
+    unittest.main()

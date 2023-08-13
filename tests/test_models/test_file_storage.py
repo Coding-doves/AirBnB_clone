@@ -96,5 +96,5 @@ class TestFileStorage(unittest.TestCase):
             self.assertEqual(loaded_obj.id, self.base_mode.id)
 
 
-    if __name__ == '__main__':
-        unittest.main()
+if __name__ == '__main__':
+    unittest.main()

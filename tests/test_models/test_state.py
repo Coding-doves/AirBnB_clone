@@ -53,5 +53,5 @@ class TestState(unittest.TestCase):
             State(id=None, name='', created_at=None, updated_at=None)
 
 
-        if __name__ == '__main__':
-            unittest.main()
+if __name__ == '__main__':
+    unittest.main()
