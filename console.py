@@ -89,12 +89,38 @@ class HBNBCommand(cmd.Cmd):
             del obj_dict["{}.{}".format(string[0], string[1])]
             storage.save()
 
-    def do_update(self):
+    def do_update(self, arg):
         '''
         Updates an instance based on the class name and id by adding
         or updating attribute (save the change into the JSON file)
 
         '''
+        string = shlex.split(arg)
+        obj_dict = storage.all()
+
+        if len(string) == 0:
+            print("** class name missing **")
+        elif string[0] not in HBNBCommand.__mod_list:
+            print("** class doesn't exist **")
+        elif len(string) == 1:
+            print("** instance id missing **")
+        elif "{}.{}".format(string[0], string[1]) not in obj_dict.keys():
+            print("** no instance found **")
+        elif len(string) == 2:
+            print("** attribute name missing **")
+        elif len(string) == 3:
+            print("** value missing **")
+        else:
+            key = obj_dict["{}.{}".format(string[0], string[1])]
+            if string[2] in key.__class__.__dict__.keys():
+                #if string[2] is in the class as a key
+                type_cast_as = type(key.__class__.__dict__[string[2]])
+                key.__dict__[string[2]] = type_cast_as(string[3])
+            else:
+                key.__dict__[string[2]] = string[3]
+            storage.save()
+            
+
 
     def do_all(self, arg):
         '''
