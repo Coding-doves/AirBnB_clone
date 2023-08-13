@@ -2,7 +2,6 @@
 '''testcase for state class'''
 import unittest
 import datetime
-import uuid
 from models.review import Review
 
 
@@ -41,6 +40,7 @@ class TestReview(unittest.TestCase):
         self.assertIsInstance(json_model['updated_at'], str)
 
     def test_review_with_kwargs(self):
+        '''testing'''
         date = datetime.datetime.today()
         dt_frmt = date.isoformat()
         review = Review(
@@ -59,6 +59,7 @@ class TestReview(unittest.TestCase):
         self.assertEqual(review.updated_at, date)
 
     def test_review_with_none_kwargs(self):
+        '''testing'''
         with self.assertRaises(TypeError):
             Review(
                     id=None,

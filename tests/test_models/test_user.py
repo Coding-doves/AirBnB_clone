@@ -2,7 +2,6 @@
 '''testcase for user class'''
 import unittest
 import datetime
-import uuid
 from models.user import User
 
 
@@ -46,6 +45,7 @@ class TestUser(unittest.TestCase):
         self.assertIsInstance(json_model['updated_at'], str)
 
     def test_user_with_kwargs(self):
+        '''testing'''
         date = datetime.datetime.today()
         dt_frmt = date.isoformat()
         user = User(
@@ -66,6 +66,7 @@ class TestUser(unittest.TestCase):
         self.assertEqual(user.updated_at, date)
 
     def test_user_with_none_kwargs(self):
+        '''testing'''
         with self.assertRaises(TypeError):
             User(
                     id=None,

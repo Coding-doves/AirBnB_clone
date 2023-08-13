@@ -4,8 +4,6 @@
 import unittest
 import os
 import json
-import datetime
-import uuid
 from models import storage
 from models.engine.file_storage import FileStorage
 from models.place import Place
@@ -27,6 +25,7 @@ class TestFileStorage(unittest.TestCase):
         self.storage = FileStorage()
 
     def test_reload(self):
+        '''testing'''
         # Create test instances for each class
         base_model = BaseModel()
         user = User()

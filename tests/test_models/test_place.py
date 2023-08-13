@@ -2,7 +2,6 @@
 '''testcase for place class'''
 import unittest
 import datetime
-import uuid
 from models.place import Place
 
 
@@ -65,6 +64,7 @@ class TestPlace(unittest.TestCase):
         self.assertIsInstance(json_model['updated_at'], str)
 
     def test_place_with_kwargs(self):
+        '''testing'''
         date = datetime.datetime.today()
         dt_frmt = date.isoformat()
         place = Place(
@@ -99,6 +99,7 @@ class TestPlace(unittest.TestCase):
         self.assertEqual(place.updated_at, date)
 
     def test_place_with_none_kwargs(self):
+        '''testing'''
         with self.assertRaises(TypeError):
             Place(
                     id=None,

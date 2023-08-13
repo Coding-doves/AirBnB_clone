@@ -2,7 +2,6 @@
 '''testcase for state class'''
 import unittest
 import datetime
-import uuid
 from models.state import State
 
 
@@ -34,6 +33,7 @@ class TestState(unittest.TestCase):
         self.assertIsInstance(json_model['updated_at'], str)
 
     def test_state_with_kwargs(self):
+        '''testing'''
         date = datetime.datetime.today()
         dt_frmt = date.isoformat()
         state = State(
@@ -48,6 +48,7 @@ class TestState(unittest.TestCase):
         self.assertEqual(state.updated_at, date)
 
     def test_State_with_None_kwargs(self):
+        '''testing'''
         with self.assertRaises(TypeError):
             State(id=None, name='', created_at=None, updated_at=None)
 

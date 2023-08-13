@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """For Hbnb console Definition."""
 import cmd
-import sys
 import shlex
 from models import storage
 from models.base_model import BaseModel
@@ -72,7 +71,7 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, arg):
         '''
         Deletes an instance based on the class name and id
-        (save the change into the JSON file). 
+        (save the change into the JSON file).
 
         '''
         string = shlex.split(arg)
@@ -112,8 +111,6 @@ class HBNBCommand(cmd.Cmd):
                     if string[0] == obj.__class__.__name__:
                         instances.append(obj.__str__())
                 print(instances)
-                    
-
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
