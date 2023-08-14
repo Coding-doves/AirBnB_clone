@@ -19,7 +19,15 @@ class HBNBCommand(cmd.Cmd):
     """
 
     prompt = "(hbnb) "
-    __mod_list = ['BaseModel']
+    __mod_list = {
+            'BaseModel',
+            'User',
+            'Place',
+            'State',
+            'City',
+            'Amenity',
+            'Review',
+            }
 
     def do_quit(self, arg):
         """Quit command to exit the program."""
@@ -48,11 +56,10 @@ class HBNBCommand(cmd.Cmd):
             return
         else:
             if arg in HBNBCommand.__mod_list:
-                if arg == 'BaseModel':
-                    new_inst = BaseModel()
-                    new_inst.save()
-                    print(new_inst.id)
-                    return
+                new_inst = eval(arg)()
+                new_inst.save()
+                print(new_inst.id)
+                return
 
     def do_show(self, argv):
         '''
