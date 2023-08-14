@@ -10,6 +10,7 @@ class TestBaseModal(unittest.TestCase):
     '''
     Test cases for the Base class.
     '''
+
     def test_base_model(self):
         '''testing base'''
         self.base = BaseModel()
@@ -36,6 +37,10 @@ class TestBaseModal(unittest.TestCase):
         self.assertEqual(json_model['name'], 'Model Airbnb')
         self.assertIsInstance(json_model['created_at'], str)
         self.assertIsInstance(json_model['updated_at'], str)
+
+        new = BaseModel()
+        self.assertEqual(
+            str(new),  "[BaseModel] ({}) {}".format(new.id, new.__dict__))
 
     def test_base_model_with_kwargs(self):
         '''testing'''
