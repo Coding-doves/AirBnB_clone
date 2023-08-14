@@ -64,8 +64,6 @@ class FileStorage:
                 for key, val in objt.items():
                     cls_name, obj_id = key.split('.')
                     cls = classes.get(cls_name)
-
-                if cls:
                     inst = cls(**val)
                     FileStorage.__objects[key] = inst
         except FileNotFoundError:
