@@ -1,9 +1,8 @@
 footer{
 	color: #00FF00;
 	height: 60px;
-	width: 100%
-}
-footer p{
-        top: 50%;
-        left: 50%
+	width: 100%;
+	display: flex;
+    justify-content: center;
+    align-items: center;
 }
