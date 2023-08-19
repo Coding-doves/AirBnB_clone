@@ -1,0 +1,16 @@
+.places h1,
+.places article h2{font: 30px;}
+.places .contain_places{
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center center;
+}
+.places article{
+    width: 390px;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #FF5A5F;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+}

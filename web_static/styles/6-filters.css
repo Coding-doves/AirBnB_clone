@@ -55,6 +55,7 @@
 	border-radius: 4px;
 	display: none;
 	list-style-type: none;
+	z-index: 1000px;
 }
 .filters .popover ul{list-style-type: none;}
 .filters .popover ul li{padding: 3px;}
