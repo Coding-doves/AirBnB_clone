@@ -25,16 +25,14 @@
 	width: 50%;
 	height: 100%;
 	display: flex;
-	flex-direction: row;
+	align-items: center;
 }
 .filters .feat .locations, .filters .feat .amenities{
 	height: 100%;
 	width: 50%;
 }
-.filters .locations
-{
-	border-right: 1px solid #DDDDDD;
-}
+.filters .locations{border-right: 1px solid #DDDDDD;}
+.filters .amenities{margin-top: 0;}
 .filters .locations h3,
 .filters .locations h4,
 .filters .amenities h3,

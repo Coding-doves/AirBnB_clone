@@ -83,32 +83,32 @@ span.icon{
     font-size: 16px;
     border-bottom: 1px solid #DDDDDD;
 }
-.amenities ul,
-.reviews ul{
+.amenities ul.list,
+.reviews ul.list2{
     list-style-type: none;
 }
-.amenities ul li{
+.amenities ul.list li{
     display: flex;
     gap: 12px;
     margin: 8px;
     align-items: center;
 }
-.amenities ul li span.pet,
-.amenities ul li span.tv,
-.amenities ul li span.wifi{
+.amenities ul.list li span.pet,
+.amenities ul.list li span.tv,
+.amenities ul.list li span.wifi{
     background-repeat: no-repeat;
     background-position: center;
     width: 40px;
     height: 40px;
 }
-.amenities ul li span.pet{
+.amenities ul.list li span.pet{
     background-image: url('../images/icon_pets.png');
 }
-.amenities ul li span.tv{
+.amenities ul.list li span.tv{
     background-image: url('../images/icon_tv.png');
 }
-.amenities ul li span.wifi{
+.amenities ul.list li span.wifi{
     background-image: url('../images/icon_wifi.png');
 }
-.reviews ul li h3{font-size: 14px;}
-.reviews ul li p{font-size: 12px;}
+.reviews ul.list2 li h3{font-size: 14px;}
+.reviews ul.list2 li p{font-size: 12px;}
